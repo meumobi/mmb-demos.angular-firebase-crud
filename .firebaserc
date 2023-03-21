@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "mmbd-angular-firebase-crud": {
+      "hosting": {
+        "mmb-demos.angular-firebase-crud": [
+          "mmbd-angular-firebase-crud"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "mmbd-angular-firebase-crud"
+  }
+}
