@@ -1,11 +1,23 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Header</ion-title>
+    <ion-title>My tickets</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h1>Main Content</h1>
+  <ion-list lines="none">
+    <ion-item *ngFor="let task of tasks$ | async">
+      <ion-label>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+      </ion-label>
+      <div [ngSwitch]="task.status">
+        <ion-badge *ngSwitchCase="taskStatus.TODO" color="tertiary">todo{{ taskStatus.TODO }}</ion-badge>
+        <ion-badge *ngSwitchCase="taskStatus.IN_PROGRESS" color="warning">{{ taskStatus.IN_PROGRESS }}</ion-badge>
+        <ion-badge *ngSwitchCase="taskStatus.DONE" color="primary">done{{ taskStatus.DONE }}</ion-badge>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 <ion-footer>
