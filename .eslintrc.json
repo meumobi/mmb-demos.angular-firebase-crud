@@ -5,6 +5,14 @@
   ],
   "overrides": [
     {
+      "files": ["functions/**/*.js"],
+      "extends": "eslint:recommended",
+      "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+      }
+    },
+    {
       "files": [
         "*.ts"
       ],

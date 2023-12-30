@@ -16,7 +16,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "paths": {
-      "@meumobi/shared": ["./dist/shared"]
+      "@meumobi/shared": ["./functions/dist/@meumobi/shared"]
     },
     "importHelpers": true,
     "target": "ES2022",
