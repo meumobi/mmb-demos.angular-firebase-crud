@@ -9,6 +9,12 @@
         "*.ts"
       ],
       "rules": {
+        "@angular-eslint/component-class-suffix": [
+          "error",
+          {
+            "suffixes": ["Component", "Dialog", "Page"]
+          }
+        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
