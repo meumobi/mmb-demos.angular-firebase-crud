@@ -1,1 +1,26 @@
-<router-outlet></router-outlet>
+<mat-toolbar class="mat-elevation-z3">
+  <button mat-icon-button (click)="sidenav.toggle()" *ngIf="mobileQuery.matches"><mat-icon>menu</mat-icon></button>
+  <span routerLink="/">Signals Crud</span>
+</mat-toolbar>
+<!--[fixedInViewport]="mobileQuery.matches" fixedTopGap="56" -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches">
+      <h3>Nav items</h3>
+      <mat-nav-list>
+        @for (nav of fillerNav; track nav) {
+          <a mat-list-item routerLink=".">{{nav}}</a>
+        }
+      </mat-nav-list>
+      <mat-divider></mat-divider>
+
+      <button mat-button class="menu-button">
+        <mat-icon>help</mat-icon>
+        <span>Help</span>
+      </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <section class="content mat-elevation-z3">
+      <router-outlet></router-outlet>
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>

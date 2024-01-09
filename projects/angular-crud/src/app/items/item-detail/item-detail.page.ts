@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { ItemService } from '../shared/services';
-import { ActivatedRoute } from '@angular/router';
 import { Item } from '../item.model';
 
 @Component({
@@ -11,16 +10,16 @@ import { Item } from '../item.model';
   templateUrl: './item-detail.page.html',
   styleUrl: './item-detail.page.scss',
 })
-export class ItemDetailPage implements OnInit {
+export class ItemDetailPage {
   item!: Item | null;
-  private itemId!: string | null;
 
   itemService = inject(ItemService);
-  activatedRoute = inject(ActivatedRoute);
 
-  ngOnInit(): void {
-    this.itemId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.itemService.getById(this.itemId).then((item) => {
+  // Load the items details when the id changes through the URL :id parameter
+  @Input()
+  set id(itemId: string) {
+    console.log('itemId: ', itemId);
+    this.itemService.getById(itemId).then((item) => {
       this.item = item;
     });
   }

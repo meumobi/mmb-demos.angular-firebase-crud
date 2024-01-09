@@ -1,4 +1,4 @@
-import { Injectable, Signal, signal } from '@angular/core';
+import { Injectable, Signal, computed, signal } from '@angular/core';
 import { ItemMockData } from '../../item-mock.data';
 import { Item } from '../../item.model';
 
@@ -14,6 +14,10 @@ export class ItemMockService {
 
   get $data(): Signal<Item[]> {
     return this.state.$items.asReadonly();
+  }
+
+  get $countItems(): Signal<number> {
+    return computed(() => this.state.$items().length);
   }
 
   getById(id: string | null): Promise<Item | null> {

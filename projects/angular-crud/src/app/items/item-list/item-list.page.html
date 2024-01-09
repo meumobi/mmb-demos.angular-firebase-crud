@@ -1,9 +1,28 @@
-<ng-container *ngIf="$items() as items; else loading">
-  <div *ngIf="items.length > 0; else empty">
-    <ul *ngFor="let item of items">
-      <li routerLink="/items/detail/{{ item.id }}">{{ item.title }}</li>
-    </ul>
-  </div>
-</ng-container>
 <ng-template #loading>Loading...</ng-template>
 <ng-template #empty>No items found!</ng-template>
+
+<section class="container" *ngIf="$items() as items; else loading">
+  <div class="container__header">
+    <span>Items ({{$countItems()}})</span>
+  </div>
+  <mat-nav-list *ngIf="items.length > 0; else empty">
+    @for (item of $items(); track item.id) {
+    <mat-list-item>
+      <a matListItemTitle routerLink="/items/detail/{{ item.id }}">{{ item.title }}</a>
+      <button mat-icon-button (click)="onClickEdit(item)" matListItemMeta>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-list-item>
+    }
+  </mat-nav-list>
+</section>
+
+<button
+  (click)="onClickCreate()"
+  mat-fab
+  color="accent"
+  class="fab-button"
+  aria-label="Example icon button with a delete icon"
+>
+  <mat-icon>create</mat-icon>
+</button>
