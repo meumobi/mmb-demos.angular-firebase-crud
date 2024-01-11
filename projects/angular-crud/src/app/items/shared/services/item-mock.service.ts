@@ -21,34 +21,54 @@ export class ItemMockService {
   }
 
   getById(id: string | null): Promise<Item | null> {
-    const item = ItemMockData.data.find((x) => x.id === id);
+    const item = this.$data().find((x) => x.id === id);
 
     return new Promise((resolve) =>
       setTimeout(() => resolve(item ?? null), 2000)
     );
   }
 
-  update(toUpdateItemId: string, data: Partial<Item>): void {
+  update(toUpdateItemId: string, data: Partial<Item>): Promise<void> {
     const newItemList = this.$data().map((item) => {
       if (item.id === toUpdateItemId) {
-        return { ...item, ...data };
+        return { ...item, ...data, updatedAt: new Date().toISOString() };
       }
       return item;
     });
     this.state.$items.set(newItemList);
+
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        this.state.$items.set(newItemList);
+        return resolve();
+      }, 2000)
+    );
   }
 
-  create(item: Item): void {
+  create(item: Item): Promise<void> {
     const newItem: Item = {
       ...item,
       id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
-    this.state.$items.update((items) => [...items, newItem]);
+
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        this.state.$items.update((items) => [...items, newItem]);
+        return resolve();
+      }, 2000)
+    );
   }
 
-  delete(toDeleteItemId: string): void {
-    this.state.$items.update((items) =>
-      items.filter((item) => item.id !== toDeleteItemId)
+  delete(toDeleteItemId: string): Promise<void> {
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        this.state.$items.update((items) =>
+          items.filter((item) => item.id !== toDeleteItemId)
+        );
+        return resolve();
+      }, 2000)
     );
   }
 }

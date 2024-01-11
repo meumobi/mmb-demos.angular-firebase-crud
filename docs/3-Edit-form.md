@@ -1,64 +1,26 @@
 # Edit form
 
-## Get started w/ Angular Material
-
-[Getting started w/ Angular Material](https://material.angular.io/guide/getting-started)
-
-```sh
-% ng add @angular/material --project angular-crud
-Skipping installation: Package already installed
-? Choose a prebuilt theme name, or "custom" for a custom theme: Custom
-? Set up global Angular Material typography styles? Yes
-? Include the Angular animations module? Include and enable animations
-UPDATE package.json (1921 bytes)
-✔ Packages installed successfully.
-UPDATE projects/angular-crud/src/app/app.config.ts (322 bytes)
-UPDATE projects/angular-crud/src/styles.scss (1652 bytes)
-UPDATE projects/angular-crud/src/index.html (520 bytes)
-%
-```
-
-## Set up a custom theme
-
-[Set up your custom theme](https://levelup.gitconnected.com/defining-your-own-theme-in-angular-material-8a4a6ffad400)
-[Angular Material design palette generator](http://mcg.mbitson.com/)
-
-## item-list
-
-> Use lists to help users find a specific item and act on it
-
-Source: https://m3.material.io/components/lists/overview
-
-```html
-<ng-template #loading>Loading...</ng-template>
-<ng-template #empty>No items found!</ng-template>
-
-<section class="container" *ngIf="$items() as items; else loading">
-  <div class="container__header">
-    <span>Items ({{$countItems()}})</span>
-  </div>
-  <mat-nav-list *ngIf="items.length > 0; else empty">
-    @for (item of $items(); track item) {
-    <mat-list-item>
-      <a matListItemTitle href="/items/detail/{{ item.id }}"
-        >{{ item.title }}</a
-      >
-      <button mat-icon-button (click)="onClickEdit(item)" matListItemMeta>
-        <mat-icon>edit</mat-icon>
-      </button>
-    </mat-list-item>
-    }
-  </mat-nav-list>
-</section>
-```
-
-> Native <button> and <a> elements are always used in order to provide the most straightforward and accessible experience for users. A <button> element should be used whenever some action is performed. An <a> element should be used whenever the user will navigate to another view.
-
-Source: https://material.angular.io/components/button/overview
+Based on [modality in UX/UI best practices](https://uxplanet.org/modality-the-one-ux-concept-you-need-to-understand-when-designing-intuitive-user-interfaces-e5e941c7acb1) should use modal with create/edit form.
 
 ## item-form.modal
 
+ng g c items/item-form -m items --type modal --project angular-crud
+
+Update eslint config (`.eslintrc`) to add 'modal' as component class suffix:
+
+```json
+"rules": {
+  "@angular-eslint/component-class-suffix": [
+    "error",
+    {
+      "suffixes": ["Page", "Component", "Modal"]
+    }
+  ],
+```
+
 https://blog.angular-university.io/angular-material-dialog/
+
+https://material.angular.io/components/dialog/overview
 
 show, post, edit, and delete text/image posts.
 https://lidiacodes.medium.com/no-backend-no-problem-a-guide-to-crud-operations-using-firebase-and-angular-fire-v7-7de1ac26f18e
@@ -73,3 +35,7 @@ https://dev.to/ngrx/announcing-ngrx-v16-integration-with-angular-signals-functio
 
 - [github.com/Tariqu/angular-crud-app](https://github.com/Tariqu/angular-crud-app)
 - [medium.com/@lspeixotodev - Angular CRUD w/ Observables and Signals](https://medium.com/@lspeixotodev/criando-um-crud-com-angular-observables-signals-75008ff4671c)
+- [coyleandrew.medium.com - Form design best practices](https://coyleandrew.medium.com/form-design-best-practices-9525c321d759)
+- [medium.com/ngconf - An Introduction to Angular Material Form-Fields](https://medium.com/ngconf/an-introduction-to-angular-material-form-fields-5828b92d3a3c)
+- [blog.angular-university.io - Angular Material Dialog: A Complete Example](https://blog.angular-university.io/angular-material-dialog/)
+- [stackoverflow - Form values non nullable by default](https://stackoverflow.com/a/73242411/4982169)

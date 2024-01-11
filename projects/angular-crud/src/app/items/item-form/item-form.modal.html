@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Edit form</h2>
+<mat-dialog-content [formGroup]="form">
+  <mat-form-field hintLabel="Max 10 characters" appearance="outline">
+    <mat-label>Title</mat-label>
+    <input
+      #input
+      matInput
+      placeholder="Another day of sun!"
+      maxlength="10"
+      formControlName="title"
+      type="text"
+    />
+    <!--     <button mat-icon-button matSuffix>
+      <mat-icon>visibility</mat-icon>
+    </button> -->
+    @if (f['title'].errors && f['title'].errors['required']) {
+    <mat-error>This field cannot be empty</mat-error>
+    }
+    <mat-hint align="end">{{input.value.length}}/40</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea
+      matInput
+      placeholder="Ex. Lorem ipsum..."
+      formControlName="description"
+    ></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onClickClose()">Close</button>
+  <button mat-button (click)="onClickSave()" cdkFocusInitial>Save</button>
+</mat-dialog-actions>
